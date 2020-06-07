@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "os-utils": "0.0.14"
+    "os-utils": "0.0.14",
+    "systeminformation": "^4.26.9"
   }
 }
