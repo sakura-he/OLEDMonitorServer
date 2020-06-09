@@ -1,0 +1,1 @@
+# 如要修改获取指定的系统信息可以参考https://systeminformation.io/
