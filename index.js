@@ -7,6 +7,7 @@ infoKey = {
     cpuCurrentspeed: 'avg',  // cpu当前平均速度 单位GHZ
     cpuTemperature: 'main',  // cpu当前平均温度 单位摄氏度
     mem: 'used,free',  // 已用内存和剩余内存 单位字节
+    currentLoad: 'currentload',
     fsSize: '*'
 }
 
@@ -31,9 +32,14 @@ function getInfo() {
     try {
         sysInfo.get(infoKey).then(data => infoValue = data);
         message =
-        // 视图@icon@key@value@unit@all
-            `?1@1@Cpu@${infoValue.cpuCurrentspeed.avg}@GHz@1.9-1@8@CpuT@${infoValue.cpuTemperature.main}@C@100-1@3@MEM@${Math.round(infoValue.mem.used / 100000000) / 10}/${Math.round(infoValue.mem.free / 100000000) / 10}@GB@0!`;
+            //传递格式: @是分隔符
+            //    视图模式(1大字模式,2列表模式)@图标(以遗弃)or列表模式的第二个信息@系统信息标题@系统信息值@单位@最大值
+            `?1@1@Cpu@${infoValue.cpuCurrentspeed.avg}@GHz@1.99
+            -1@9@CPUtemperature@${infoValue.cpuTemperature.main}@*C@100
+            -2@CPULoaded#${Math.round(infoValue.currentLoad.currentload)}#%#100@MEM@${Math.round(infoValue.mem.used / 100000000) / 10}@GB@4.2
+            !`;
     } catch (error) {
         console.log(error);
     }
 }
+//${Math.round(infoValue.mem.free / 100000000) / 10}
